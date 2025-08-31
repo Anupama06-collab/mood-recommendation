@@ -64,7 +64,7 @@ function App() {
     setMood(selectedMood);
     try {
       const res = await axios.get(
-        `https://your-backend-url.onrender.com/recommendations?mood=${selectedMood}`
+        `https://mood-recommendation-1.onrender.com/recommendations?mood=${selectedMood}`
       );
       setRecommendations(res.data);
     } catch (err) {
