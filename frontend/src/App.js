@@ -54,7 +54,7 @@ function App() {
 
     try {
       const res = await axios.get(
-        `${BACKEND_URL}/recommendations?mood=${selectedMood}`
+        `${BACKEND_URL}/recommendations?mood=${selectedMood}`+mood
       );
       console.log(res.data);
       setRecommendations(res.data);
