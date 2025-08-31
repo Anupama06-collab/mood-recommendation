@@ -73,70 +73,90 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-blue-100 to-purple-200 p-6">
-      <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
-        🎭 Mood-Based Recommender
-      </h1>
+    <div className="min-h-screen bg-gradient-to-b from-indigo-100 to-purple-200 flex flex-col">
+      {/* Navbar */}
+      <header className="bg-indigo-600 text-white shadow-lg py-4 px-6 flex justify-center items-center">
+        <h1 className="text-2xl font-bold">🎭 MoodMate</h1>
+      </header>
 
-      {/* Mood Buttons */}
-      <div className="flex justify-center gap-4 mb-8">
-        <button
-          onClick={() => fetchRecommendations("happy")}
-          className={`px-6 py-3 rounded-xl font-semibold shadow-md transition ${
-            mood === "happy"
-              ? "bg-yellow-400 text-white"
-              : "bg-yellow-200 hover:bg-yellow-300"
-          }`}
-        >
-          😀 Happy
-        </button>
+      {/* Main Content */}
+      <main className="flex-1 p-6 flex flex-col items-center">
+        <h2 className="text-xl font-semibold text-gray-700 mb-4">
+          Select your mood
+        </h2>
 
-        <button
-          onClick={() => fetchRecommendations("sad")}
-          className={`px-6 py-3 rounded-xl font-semibold shadow-md transition ${
-            mood === "sad"
-              ? "bg-blue-500 text-white"
-              : "bg-blue-200 hover:bg-blue-300"
-          }`}
-        >
-          😢 Sad
-        </button>
+        {/* Mood Buttons */}
+        <div className="flex gap-4 mb-8">
+          <button
+            onClick={() => fetchRecommendations("happy")}
+            className={`px-6 py-3 rounded-full font-bold shadow-md transition ${
+              mood === "happy"
+                ? "bg-yellow-400 text-white"
+                : "bg-yellow-200 hover:bg-yellow-300"
+            }`}
+          >
+            😀 Happy
+          </button>
 
-        <button
-          onClick={() => fetchRecommendations("excited")}
-          className={`px-6 py-3 rounded-xl font-semibold shadow-md transition ${
-            mood === "excited"
-              ? "bg-purple-500 text-white"
-              : "bg-purple-200 hover:bg-purple-300"
-          }`}
-        >
-          🤩 Excited
-        </button>
-      </div>
+          <button
+            onClick={() => fetchRecommendations("sad")}
+            className={`px-6 py-3 rounded-full font-bold shadow-md transition ${
+              mood === "sad"
+                ? "bg-blue-500 text-white"
+                : "bg-blue-200 hover:bg-blue-300"
+            }`}
+          >
+            😢 Sad
+          </button>
 
-      {/* Recommendations */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {recommendations.length > 0 ? (
-          recommendations.map((rec) => (
-            <div
-              key={rec._id}
-              className="bg-white rounded-2xl shadow-lg p-5 hover:shadow-xl transition"
-            >
-              <h2 className="text-lg font-bold text-gray-800">{rec.title}</h2>
-              <p className="text-sm text-gray-500 uppercase">{rec.type}</p>
-              <p className="mt-2 text-gray-700">
-                {rec.description || "No description available."}
-              </p>
-            </div>
-          ))
-        ) : (
-          <p className="col-span-full text-center text-gray-600 text-lg">
-            {mood
-              ? "No recommendations found 😕"
-              : "Choose a mood to get recommendations 🎬📚"}
-          </p>
-        )}
-      </div>
+          <button
+            onClick={() => fetchRecommendations("excited")}
+            className={`px-6 py-3 rounded-full font-bold shadow-md transition ${
+              mood === "excited"
+                ? "bg-purple-500 text-white"
+                : "bg-purple-200 hover:bg-purple-300"
+            }`}
+          >
+            🤩 Excited
+          </button>
+        </div>
+
+        {/* Recommendations */}
+        <div className="w-full max-w-3xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {recommendations.length > 0 ? (
+            recommendations.map((rec) => (
+              <div
+                key={rec._id}
+                className="bg-white rounded-2xl shadow-lg p-5 hover:shadow-2xl transition flex flex-col items-center text-center"
+              >
+                {/* Placeholder Image */}
+                <div className="w-24 h-24 bg-gray-200 rounded-xl flex items-center justify-center text-4xl mb-3">
+                  {rec.type === "movie" ? "🎬" : "📖"}
+                </div>
+
+                <h2 className="text-lg font-bold text-gray-800">
+                  {rec.title}
+                </h2>
+                <p className="text-sm text-gray-500 uppercase">{rec.type}</p>
+                <p className="mt-2 text-gray-600 text-sm">
+                  {rec.description || "No description available."}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p className="col-span-full text-center text-gray-600 text-lg">
+              {mood
+                ? "No recommendations found 😕"
+                : "Choose a mood to get recommendations 🎬📚"}
+            </p>
+          )}
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-indigo-600 text-white text-center py-3 text-sm">
+        ❤️ Made with React + Tailwind
+      </footer>
     </div>
   );
 }
